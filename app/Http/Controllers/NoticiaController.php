@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Noticia;
+use \Illuminate\Http\Request;
 use App\Http\Requests\StoreNoticiaRequest;
 use App\Http\Requests\UpdateNoticiaRequest;
 
@@ -15,7 +16,12 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        //
+        $noticias = Noticia::orderByDesc('created_at')->limit(10)->get();
+
+        return view('noticias', [
+            'noticias' => $noticias
+        ]);
+
     }
 
     /**
